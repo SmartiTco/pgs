@@ -2,12 +2,6 @@
 
 Seiya
 =======
-
-.. toctree::
-   :maxdepth: 2
-
-.. _intro:
-
 -------------
 Description
 ~~~~~~
@@ -17,9 +11,7 @@ En ce moment (*v0.1.0*), Le seul composant disponible est le texte, avec le chat
 
 Le plan consiste à ajouter des composants et des fonctionnalités (comme exporter le tableau en tant que texte au lieu d'image), progressivement, jusqu'à ce que le projet atteigne son but initial(indiqué ci-dessus).
 
-Ce projet faisait partie de la deuxième édition de `Learn IT, Girl`_,et n'aurait pas été possible sans le mentorat continu, le soutien et la tolérance de 'newbie' questions avec gracieuseté de `@daniel-j-h`_. 
-
-Rules
+Règles
 ~~~~~~
 - Les utilisateurs inscrits peuvent créer un tableau, auquel ils peuvent donner accès à un nombre quelconque d'autres utilisateurs.
 - Chaque conseil peut avoir accès à 3 types d'utilisateurs:
@@ -33,14 +25,14 @@ Rules
 - Tout utilisateur connecté a accès à un certain conseil qui n'est pas non plus **Owner** peuvent se retirer à tout moment.
 - Pour éviter l'édition de conflits, une seule personne peut modifier la carte à la fois.
 
-.. note:: Afin de simplifier l'interaction avec le serveur, la plupart des "heavy lifting" est fait cote client. Le serveur enregistre et fournit simplement des données sur le tableau au besoin, et le client le regroupe dans le DOM. La logique du tableau côté client peut être trouvée `on Github`_.
+.. note:: Afin de simplifier l'interaction avec le serveur, la plupart des "heavy lifting" est fait cote client. Le serveur enregistre et fournit simplement des données sur le tableau au besoin, et le client le regroupe dans le DOM. 
 
 Installation
 ~~~~~~~~~~~~
 1. Clone the repo. 
 ::
-	$ git clone https://github.com/blaringsilence/pegasus.git
-	$ cd pegasus
+	$ git clone https://github.com/stanvah/pgs.git
+	$ cd pgs
 2. Install `virtualenv`_ and activate it.
 ::
 	$ pip install virtualenv
@@ -58,19 +50,4 @@ Installation
 .. note:: Default IP:port is 127.0.0.1:5000. You can change that by specifying the port and/or IP like this:
 	``$ ./run_pegasus.py -ip IP_ADDRESS -port PORT_NUMBER``
 
-
-Docs
------
-.. automodule:: pegasus
-	:members:
-	:exclude-members: Flask, pegasus, views, errorhandlers, DATABASE, DEBUG, SECRET_KEY, app
-
-.. automodule:: pegasus.views
-	:members:
-
-.. automodule:: pegasus.errorhandlers
-	:members:
-
-.. automodule:: test_pegasus
-	:members:
 
