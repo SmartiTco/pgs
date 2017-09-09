@@ -3,17 +3,12 @@
 Seiya
 =======
 
-.. toctree::
-   :maxdepth: 2
-
-.. _intro:
-
 -------------
 Description
 ~~~~~~
 Seiya est une application de collaboration de tableau blanc dont l'objectif est de permettre / faciliter le partage en temps réel d'idées sous la forme de composants (par exemple: text, images, code, etc) qui peut être reconstitué et édité par plusieurs personnes lors d'une session en direct, et exporté à tout moment.
 
-En ce moment (*v0.1.0*), Le seul composant disponible est le texte, avec le chat de la barre latérale (qui est disponible pour tous, édite des privilèges ou non).
+En ce moment (*v0.1.0*), Le seul composant disponible est le texte, avec le chat de la barre latérale (qui est disponible pour tous).
 
 Le plan consiste à ajouter des composants et des fonctionnalités (comme exporter le tableau en tant que texte au lieu d'image), progressivement, jusqu'à ce que le projet atteigne son but initial(indiqué ci-dessus).
 

@@ -127,7 +127,7 @@ var TextElement = function(softID, canvasID, boardID, invite, canEdit){ // canEd
 			}
 			else{
 				URL = Flask.url_for('edit_component', {boardID:self.boardID, componentID:id});
-				position = ''; // won't actually be handled in any way server-side since this 'hasMessages'
+				position = '';
 			}
 
 			$.ajax({
