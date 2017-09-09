@@ -14,7 +14,7 @@
 	{% for board in boards %}
 		<li><a href="{{ url_for('show_board', boardID=board.id) }}">{{board.title}}</a></li>
 	{% else %}
-		<li>You haven't created any boards yet!</li>
+		<li>Vous n'avez pas encore créé de tableau !</li>
 	{% endfor %}
 	</ul>
 {% endblock %}
@@ -26,24 +26,24 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="editPasswordLabel">Change Password</h4>
+		        <h4 class="modal-title" id="editPasswordLabel">Modifier votre mot de passe</h4>
 		      </div>
 		      <div class="modal-body">
 				  <form id='edit-password-form'>
 				  	<input name='_csrf_token' type='hidden' value="{{ csrf_token() }}">
 				  	<div class='form-group'>
-				     <label for='password-modal'>Old Password</label>
-				     <input type='password' class='form-control' id='old-password-modal' name='old-password' placeholder='JUST TO CHECK' required>
+				     <label for='password-modal'>Ancien mot de passe</label>
+				     <input type='password' class='form-control' id='old-password-modal' name='old-password' placeholder='Vérification du mot de passe' required>
 				    </div>
 				  	<div class='form-group'>
-				     <label for='password-modal'>New Password</label>
-				     <input type='password' pattern=".{6,}" class='form-control' id='password-modal' name='password' title='Password must be at least 6 characters.' placeholder='GOING ONCE...' required>
+				     <label for='password-modal'>Nouveau mot de passe</label>
+				     <input type='password' pattern=".{6,}" class='form-control' id='password-modal' name='password' title='Le mot de passe doit au moins compter 6 caractères.' placeholder='Entrer une fois...' required>
 				    </div>
 				    <div class='form-group'>
-				     <label for='password2-modal'>New Password (again)</label>
-				     <input type='password' class='form-control' id='password2-modal' name='password2' placeholder="GOING TWICE..." required>
+				     <label for='password2-modal'>Confirmation mot de passe</label>
+				     <input type='password' class='form-control' id='password2-modal' name='password2' placeholder="Entrer une deuxième fois..." required>
 				    </div>
-				     <button type='submit' class='global-btn full-btn' id='edit-password-button'>Save</button>
+				     <button type='submit' class='global-btn full-btn' id='edit-password-button'>Sauvegarder</button>
 				  </form>
 		      </div>
 		    </div>
@@ -56,24 +56,24 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="editProfileLabel">Edit Profile</h4>
+		        <h4 class="modal-title" id="editProfileLabel">Modifier le profile</h4>
 		      </div>
 		      <div class="modal-body">
 				  <form id='edit-profile-form'>
 				  	<input name='_csrf_token' type='hidden' value="{{ csrf_token() }}">
 				  	<div class='form-group'>
-				     <label for='username-modal'>Username</label>
-				     <input type='text' class='form-control' id='username-modal' name='username' pattern='^[a-zA-Z0-9_-]{3,16}$' title='Username must consist of letters, numbers, underscores, or hyphens only, and must be at least 3 characters long and at most 16' value='{{ session.username }}' required>
+				     <label for='username-modal'>Nom d'utilisateur</label>
+				     <input type='text' class='form-control' id='username-modal' name='username' pattern='^[a-zA-Z0-9_-]{3,16}$' title='Caractères autorisées: lettre, chiffre, underscore, hyphenation. Longueur minimum: 3 caractères, longuer maximum: 16 caractères.' value='{{ session.username }}' required>
 				    </div>
 				    <div class='form-group'>
-				     <label for='name-modal'>Name</label>
+				     <label for='name-modal'>Nom & Prénom</label>
 				     <input type='text' class='form-control' id='name-modal' name='name' value='{{ name }}' placeholder="HI, WHAT'S YOUR NAME?">
 				    </div>
 				    <div class='form-group'>
-				     <label for='email-modal'>Email</label>
+				     <label for='email-modal'>Adresse e-mail</label>
 				     <input type='email' class='form-control' id='email-modal' name='email' value='{{ email }}' required>
 				    </div>
-				     <button type='submit' class='global-btn full-btn' id='edit-profile-button'>Save</button>
+				     <button type='submit' class='global-btn full-btn' id='edit-profile-button'>Sauvegarder</button>
 				  </form>
 		      </div>
 		    </div>
