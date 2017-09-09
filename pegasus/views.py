@@ -177,9 +177,9 @@ def register_user():
             return redirect(url_for('index'))
         except sqlite3.IntegrityError as e:
             if e.args[0][32:] == 'email':
-                error = 'Email is already in use.'
+                error = 'Ce nom d utilisateur existe déjà.'
             elif e.args[0][32:] == 'username':
-                error = 'Username is already in use.'
+                error = 'Ce nom d utilisateur existe déjà.'
             else:
                 error = e.args[0]
     return render_template('register.html', error=error)
@@ -194,15 +194,15 @@ def login():
         cur = g.db.execute('select username, password from users where username=?', [request.form['username'].lower()])
         cur_res = cur.fetchone()
         if cur_res is None:
-            error = 'Invalid username'
+            error = 'Nom d utilisateur invalide'
         else:
             username = cur_res[0]
             pw = cur_res[1]
             if check_password_hash(pw, request.form['password']) == False: # ouch
-                error = 'Invalid password'
+                error = 'Mot de passe invalide'
             else:
                 login_user(username)
-                flash('Hey there!', 'info')
+                flash('Bonjour!', 'info')
                 return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
@@ -223,7 +223,7 @@ def logout():
     session.pop('logged_in', None)
     session.pop('username', None)
     session.pop('userid', None)
-    flash('You go bye bye :(', 'warning')
+    flash('A bientôt :(', 'warning')
     return redirect(url_for('index')) # always going there..
 
 @app.route('/new-board', methods=['GET', 'POST'])
@@ -244,7 +244,7 @@ def create_board():
             g.db.commit()
             boardID = cur.lastrowid
             cur.close()
-            flash('Board successfully created!')
+            flash('Tableau créé avec succès!')
             return redirect(url_for('show_board', boardID=boardID))
         except sqlite3.Error as e:
             error = 'An error occured: ' + e.args[0]
@@ -307,7 +307,7 @@ def remove_self():
         except sqlite3.Error as e:
             error = e.args[0]
         if(error=='None'):
-            flash('Successfully removed you from the board.')
+            flash('Vous avez été retiré du tableau avec succès.')
         else:
             flash(error)
         return redirect(url_for('index'))
@@ -360,14 +360,14 @@ def edit_profile():
         if cur1 is not None:
             if cur1[0] != session['userid']:
                 okay = False
-                error = 'Email is not available.'
+                error = 'Email non disponible.'
         if cur2 is not None:
             if cur2[0] != session['userid']:
                 okay = False
                 if error == 'None':
-                    error = 'Username is not available.'
+                    error = 'Nom d utilisateur non disponible.'
                 else:
-                    error+=' Username is not available.'
+                    error+=' Le nom d utilisateur n est pas disponible.'
         if okay:
             if old_name != name or old_email != em or old_username != un: # only proceed if any changes were made
                 try:
@@ -391,7 +391,7 @@ def change_password():
         password = generate_password_hash(request.form['password'], method='pbkdf2:sha512:10000')
         pw = g.db.execute('select password from users where id=?', [session['userid']]).fetchone()[0]
         if not check_password_hash(pw, request.form['old-password']):
-            error = 'Old password you entered is incorrect.'
+            error = 'L ancien mot de passe que vous avez entré est incorrect.'
         else: 
             try:
                 g.db.execute('update users set password=? where id=?', [password, session['userid']])
@@ -445,7 +445,7 @@ def invite_user(email, boardID):
             g.db.commit()
             successful = 'true'
         except sqlite3.IntegrityError as e:
-            error = 'This email has already been invited to this board.'
+            error = 'Cet email a déjà été invité à ce tableau.'
         except sqlite3.Error as e: # for debugging
             error = e.args[0]
         finally:
@@ -548,7 +548,7 @@ def get_components(boardID):
                 messages = [dict(id=row[0], content=row[1], userID=row[2], userEmail=row[3], created_at=row[4], last_modified_at=row[5], last_modified_by=row[6], type=row[7], position=row[8], deleted=row[9]) for row in curList]
                 return jsonify(messages=messages, locked=LOCKED, lockedBy=lock_by)
             else:
-                error = 'Nothing new.'
+                error = 'Rien de spécial.'
                 return jsonify(error=error, locked=LOCKED, lockedBy=lock_by)
         except sqlite3.Error as e:
             error = e.args[0]
@@ -594,7 +594,7 @@ def post_components(boardID):
                     except sqlite3.Error as e:
                         error = e.args[0]
                 else:
-                    error = 'This board is locked for edit by another user.'
+                    error = 'Ce tableau est verrouillé pour être modifié par un autre utilisateur.'
             elif inv != '-1' and ((curInvite[0] == 'edit' and ty != 'chat') or (ty == 'chat')):
                 lockedUntil = datetime.strptime(curBoard[1],'%Y-%m-%d %H:%M:%S')
                 lockedBy = curBoard[2]
@@ -614,13 +614,13 @@ def post_components(boardID):
                     except sqlite3.Error as e:
                         error = e.args[0]
                 else:
-                    error = 'This board is locked for edit by another user.'
+                    error = 'Ce panneau est verrouillé pour être modifié par un autre utilisateur.'
             else:
-                error = 'Your priviliges do not allow you to post to this board.'
+                error = 'Vos privilèges ne vous permettent pas de publier dans ce tableau.'
         else:
-            error = 'Content too short.'
+            error = 'Contenu trop court.'
     else:
-        error = 'This board has expired. You cannot make any changes.'
+        error = 'Ce tableau est expiré. Vous ne pouvez pas faire de modification.'
     return jsonify(error=error, token=new_token, componentID=componentID)
 
 
@@ -635,7 +635,7 @@ def get_user(userID):
     try:
         cur = g.db.execute('select name, username from users where id=?', [int(userID)]).fetchone()
         if cur is None:
-            error = 'User not found.'
+            error = 'Utilisateur non trouvé.'
         else:
             name = cur[0]
             username = cur[1]
@@ -659,7 +659,7 @@ def invited_users(boardID):
         try:
             cur = g.db.execute('select userEmail, type from invites where boardID=? order by invite_date', [bid]).fetchall()
             if len(cur) == 0:
-                error = 'No one has been invited to this board yet.'
+                error = 'Vous n avez pas encore été invité a ce tableau.'
             else:
                 invited = [dict(userEmail=row[0], type=row[1]) for row in cur]
         except sqlite3.Error as e:
@@ -716,7 +716,7 @@ def edit_component(componentID, boardID):
                         g.db.execute('update board_content set content=?, last_modified_at=?, last_modified_by=? where id=? and boardID=? and type=? and deleted=?', [msg, nowDate, mod, cid, bid, ty, 'N'])
                         g.db.commit()
                     else:
-                        error = 'Content too short.'
+                        error = 'Contenu trop court.'
                 else: # refreshing position only
                     pos = request.form['position']
                     g.db.execute('update board_content set position=?, last_modified_at=?, last_modified_by=? where id=? and boardID=? and type=? and deleted=?', [pos, nowDate, mod, cid, bid, ty, 'N'])
@@ -724,9 +724,9 @@ def edit_component(componentID, boardID):
             except sqlite3.Error as e:
                 error = e.args[0]
         else:
-            error = 'This board has expired. You cannot make any more changes.'
+            error = 'Ce tableau est expiré. Vous ne pouvez pas faire de modification.'
     else: 
-        error = 'This board is locked for edit by another user.'
+        error = 'Ce tableau est vérrouiller par un autre utilisateur.'
     return jsonify(error=error, token=new_token)
 
 @app.route('/api/delete/board/<boardID>/component/<componentID>', methods=['POST'])
@@ -776,9 +776,9 @@ def delete_component(boardID, componentID):
             except sqlite3.Error as e:
                 error = e.args[0]
         else:
-            error = 'This board has expired. You cannot make any more changes.'
+            error = 'Ce tableau est expiré, vous ne pouvez pas faire de changement.'
     else:
-        error = 'This board is locked for edit by another user.'
+        error = 'Ce tableau est expiré. Vous ne pouvez pas faire de modification.'
     return jsonify(error=error, token=new_token)
 
 
