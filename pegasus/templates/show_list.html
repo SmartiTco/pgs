@@ -13,7 +13,7 @@
 	<h2>Tous les utilisateurs</h2>
 	<ul class='li'>
 		{% for item in li %}
-			<ol>{{ item.username }} - Joined: {{ item.jdate }}</ol>
+			<ol>{{ item.username }} - a rejoint le: {{ item.jdate }}</ol>
 		{% else %}
 			<li>Aucun utilisateur pour le moment, ajouter un utilisateur.</li>
 		{% endfor %}
