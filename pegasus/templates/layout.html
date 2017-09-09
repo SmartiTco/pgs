@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="fr-fr">
 	<head>
 		<!--Metadata-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Pegasus</title>
+		<title>Seiya</title>
 		<!--End Metadata-->
 		<!--CSS-->
 		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -19,7 +19,7 @@
 		<div  id='header' class='header container-fluid'>
 			<div class='row'>
 				<div class='col-xs-4'>
-				<a href="{{  url_for('index') }}" title='Home'>
+				<a href="{{  url_for('index') }}" title='Accueil'>
 					<svg id="logo-svg">
 						<g>
 							<polygon points="37.723,18.175 32.028,18.175 34.874,23.105   " fill="#07C87F"/>
@@ -42,18 +42,18 @@
 							<polygon points="19.928,24.338 14.235,24.338 17.081,29.269   " fill="#07C87F"/>
 						</g>
 					</svg>
-					<span class='title hidden-xs hidden-sm'>Pegasus</span></a>
+					<span class='title hidden-xs hidden-sm'>Seiya</span></a>
 					
 				</div>
 				<div class='col-xs-8 text-right login-nav'>
 				{% if not session.logged_in %}
-					<a href="{{ url_for('register_user') }}" class='register-btn'>Register</a><button class='global-btn' data-toggle='modal' data-target='#loginModal'>Login</button>
+					<a href="{{ url_for('register_user') }}" class='register-btn'>S'inscrire</a><button class='global-btn' data-toggle='modal' data-target='#loginModal'>Se connecter</button>
 				{% else %}
 					{% block controllers %}
-					<button class='global-btn register-btn' title='Create Board' data-toggle='modal' data-target='#newBoardModal'><i class='fa fa-plus'></i></button>
+					<button class='global-btn register-btn' title='Créer un tableau' data-toggle='modal' data-target='#newBoardModal'><i class='fa fa-plus'></i></button>
 					{% endblock %}
-					<button class='global-btn register-btn' title='Your profile' onclick="location.href='/profile';"><i class='fa fa-user'></i></button>
-					<a href="{{ url_for('logout') }}">Log Out</a>
+					<button class='global-btn register-btn' title='Votre profil' onclick="location.href='/profile';"><i class='fa fa-user'></i></button>
+					<a href="{{ url_for('logout') }}">Se déconnecter</a>
 				{% endif %}
 				</div>
 			</div>
@@ -77,56 +77,56 @@
 		</div>
 		<!-- Modals -->
 		{% if not session.logged_in %}
-		<!--Login-->
+		<!--Se Connecter-->
 		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="loginModalLabel">Login</h4>
+		        <h4 class="modal-title" id="loginModalLabel">Se connecter</h4>
 		      </div>
 		      <div class="modal-body">
 				  <form action="{{ url_for('login') }}" method='post'>
 				  	<input name='_csrf_token' type='hidden' value="{{ csrf_token() }}">
 				  	<div class='form-group'>
-				     <label for='username-modal'>Username</label>
-				     <input type='text' class='form-control' id='username-modal' name='username'  placeholder='NOT YOUR EMAIL' required>
+				     <label for='username-modal'>Nom d'utilisateur</label>
+				     <input type='text' class='form-control' id='username-modal' name='username'  placeholder='PAS VOTRE EMAIL' required>
 				    </div>
 				    <div class='form-group'>
-				     <label for='password-modal'>Password</label>
-				     <input type='password' class='form-control' id='password-modal' name='password'  placeholder='HOPEFULLY ALSO NOT YOUR EMAIL' required>
+				     <label for='password-modal'>Mot de passe</label>
+				     <input type='password' class='form-control' id='password-modal' name='password'  placeholder='NON PLUS VOTRE EMAIL' required>
 				    </div>
-				     <button type='submit' class='global-btn full-btn'>Login</button>
+				     <button type='submit' class='global-btn full-btn'>Se connecter</button>
 				  </form>
 		      </div>
 		    </div>
 		  </div>
 		</div>
-		<!--End Login-->
+		<!--Fin se connecter-->
 		{% else %}
 		{% block controller_modals %}
-		<!--New Board-->
+		<!--Nouveau tableau-->
 		<div class="modal fade" id="newBoardModal" tabindex="-1" role="dialog" aria-labelledby="newBoardLabel">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="newBoardLabel">Create Board</h4>
+		        <h4 class="modal-title" id="newBoardLabel">Créer un tableau</h4>
 		      </div>
 		      <div class="modal-body">
 				  <form action="{{ url_for('create_board') }}" method='post'>
 				  	<input name='_csrf_token' type='hidden' value="{{ csrf_token() }}">
 				  	<div class='form-group'>
-				     <label for='title-modal'>Title</label>
-				     <input type='text' class='form-control' id='title-modal' name='title'  placeholder='SOMETHING DESCRIPTIVE' required>
+				     <label for='title-modal'>Titre</label>
+				     <input type='text' class='form-control' id='title-modal' name='title'  placeholder='QUELQUES DESCRIPTIF' required>
 				    </div>
-				     <button type='submit' class='global-btn full-btn'>Create</button>
+				     <button type='submit' class='global-btn full-btn'>Créer</button>
 				  </form>
 		      </div>
 		    </div>
 		  </div>
 		</div>
-		<!--End New Board-->
+		<!--Fin Nouveau Tableau-->
 		{% endblock %}
 		{% endif %}
 		<!--End Modals-->

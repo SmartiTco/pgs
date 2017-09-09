@@ -8,11 +8,11 @@ from contextlib import closing
 from flask_jsglue import JSGlue
 
 # config (which should be in another file for larger apps)
-DATABASE = '/tmp/pegasus.db'
+DATABASE = '/tmp/zeus.db'
 """SQLite database file. Schema can be found in schema.sql"""
 DEBUG = True
 """For dev purposes."""
-SECRET_KEY = 'you shall not pass'
+SECRET_KEY = 'aza manotany eh'
 """Also for dev purposes."""
 CSRF_ENABLED = True
 """To be able to disable it when testing"""

@@ -1,10 +1,8 @@
 """
-Views
+Vue
 ------
-This module contains all the business logic related to the app 'views'/URLs and how the server interacts
-with the database.
-Because it's a simple enough app, for now, queries are directly written instead of being processed by something like SQLAlchemy.
-All AJAX POST functions return a new CSRF-protection token as the token is per request, not per session.
+Ce module contient toute la logique commerciale liée aux "vues" / URL de l'application et à la manière dont le serveur interagit
+avec la base de données.
 
 Division
 ~~~~~~~~
@@ -14,7 +12,7 @@ Division
 
 Database
 ~~~~~~~~
-In order for the following to make sense, here's the database schema/logic:
+le schéma / logique de la base de données:
         +---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
         |   TABLE       |   COLUMNS                                                                                                                                                |
         +===============+==========================================================================================================================================================+    
@@ -62,31 +60,31 @@ from itertools import islice
 
 
 
-# all the definitions
+# All function
 def get_random_string(length=32):
     """Generate a random string of length 32, used in ``generate_csrf_token()``"""
     return ''.join(random.choice(string.ascii_letters + string.digits) for i in range(length))
 
 def generate_csrf_token():
-    """Create a CSRF-protection token if one doesn't already exist in the user's session and put it there."""
+    """Creation CSRF-protection token"""
     if '_csrf_token' not in session:
         session['_csrf_token'] = get_random_string()
     return session['_csrf_token']
 
 app.jinja_env.globals['csrf_token'] = generate_csrf_token
-"""Whenever `{{ csrf_token() }}` is used in a Jinja2 template, it returns the result of the function `generate_csrf_token()` """
+"""Rehefa `{{ csrf_token() }}` miasa , mi return `generate_csrf_token()` """
 
 def login_user(username):
-    """Login user using their username. Put username and userid (find in database) in their respective sessions."""
+    """login: username no apesaina """
     session['logged_in'] = True
     session['username'] = username
     cur = g.db.execute('select id from users where username=?', [username]).fetchone()
     uid = cur[0]
-    session['userid'] = uid # to register any info in another table where userid is a FK instead of querying every time
+    session['userid'] = uid # enregister dans le tab userid
 
 
 def is_owner(boardID, userID):
-    """Check if a user is the owner of a certain board."""
+    """verification si un user est proprietaire d'un board"""
     cur = g.db.execute('select creatorID from boards where id=?', [boardID]).fetchone()[0]
     if cur == userID:
         return True
@@ -94,9 +92,9 @@ def is_owner(boardID, userID):
         return False
 
 def lock_board(boardID, userID=None, userEmail=None): 
-    """Called after making sure the board isn't currently locked and the user has editing access.
-    Any sqlite3.Error s handled in calling function.
-    Lock the board for 5 seconds.
+    """Appelé après avoir vérifié la carte n'est pas actuellement verrouille et que l'user a accès à l'edit.
+    sqlite3.Error s géré dans la fonction d'appel.
+    Verrouillez la carte 5 secondes.
     """
     user = userID if userID is not None else userEmail
     lock = datetime.utcnow() + timedelta(seconds=5) 
@@ -105,10 +103,10 @@ def lock_board(boardID, userID=None, userEmail=None):
     g.db.commit()
 
 def is_authorized(boardID, wantToEdit=False):
-    """Check if a certain signed in user (who by default doesn't want to edit the board) is authorized to access it, 
-    and if yes, what's the extent of their access? View/Edit/Owner.
-    If edit/owner, can they edit now? (if the board is not locked, this function will lock it for them).
-    Returns a hash that includes access (boolean), isOwner (boolean), canEditNow (boolean), and accessType (str)
+    """Vérifiez si un user signé (par défaut ne veut pas éditer le tableau) est autorisé à y accéder,
+    et si oui, accès? owner, edit, view.
+    Si edit / owner, peuvent-ils éditer maintenant? (si le tableau n'est pas verrouillé, cette fonction va le verrouiller pour eux).
+    Renvoie un hachage qui comprend l'accès (booléen), le propriétaire (booléen), le canEditNow (booléen) et l'accèsType (str)
     """
     access = False
     isOwner = False
@@ -117,7 +115,7 @@ def is_authorized(boardID, wantToEdit=False):
     if session.get('logged_in'):
         # not counting in the invitation link logic here
         uid = session['userid']
-        # are they the owner?
+        # propietaire?
         if is_owner(boardID, uid):
             access = True
             isOwner = True
@@ -129,7 +127,7 @@ def is_authorized(boardID, wantToEdit=False):
                 access = True
                 accessType = cur2[0]
         if accessType =='edit' and wantToEdit:
-            # boardID must exist at this point, checked by calling functions
+            # IDBoard doit exister, vérifie par les fonctions d'appel
             lock = g.db.execute('select locked_until, locked_by from boards where id=?', [boardID]).fetchone()
             if lock is not None:
                 lockedUntil = datetime.strptime(lock[0], '%Y-%m-%d %H:%M:%S')
@@ -175,7 +173,7 @@ def register_user():
             g.db.execute('insert into users (username, password, email, name) values (?, ?, ?, ?)', [un, pw, em, request.form['name']])
             g.db.commit()
             login_user(un)
-            flash('Successfully registered!')
+            flash('Enregistré avec succès!')
             return redirect(url_for('index'))
         except sqlite3.IntegrityError as e:
             if e.args[0][32:] == 'email':
@@ -254,13 +252,12 @@ def create_board():
 
 @app.route('/board/<boardID>')
 def show_board(boardID):
-    """Show board with a specified `boardID`.
+    """Show board avec `boardID`.
 
     Hierarchy of errors:
-        1. *404* : board not found.
-        2. *401* : not authorized. Person trying to view the board is not logged in with access to this board or does not have a (valid) invite code.
-
-    Renders the page (initially) according to the access type of the user (owner, edit, view).
+         1. * 404 *: tableau non trouvé.
+        2. * 401 *: non autorisé.
+    rend page (initially) according to the access type of the user (owner, edit, view).
     """
     # first, check if there's even a board
     curB = g.db.execute('select title, created_at, done_at from boards where id=?', [boardID]).fetchone()
@@ -475,7 +472,7 @@ def edit_board(boardID):
 
 @app.route('/api/expire/board/<boardID>', methods=['POST'])
 def mark_done(boardID):
-    """Mark a board as done before the 24 hours are up. Only available to the owner of the board."""
+    """Mark a board as done before the 24 hours are up. despo pour owner"""
     if not session.get('logged_in'):
         abort(401)
     else:
@@ -496,7 +493,7 @@ def mark_done(boardID):
 
 @app.route('/api/delete/board/<boardID>', methods=['POST'])
 def delete_board(boardID):
-    """Delete board. Only allows it in case the board in question"""
+    """Delete board. Ne le permet que dans le cas où board en question"""
     if not session.get('logged_in'):
         abort(401)
     else:
@@ -514,7 +511,7 @@ def delete_board(boardID):
 
 @app.route('/api/board/<boardID>/components/get', methods=['GET'])
 def get_components(boardID):
-    """Get all components of a board. This includes:
+    """Get all components of a board:
         - Chat, text, and other components along with all their relevant data (date, who, etc).
         - State of the board: locked/unlocked.
     """
@@ -629,7 +626,7 @@ def post_components(boardID):
 
 @app.route('/api/user/<userID>', methods=['GET'])
 def get_user(userID):
-    """Get a user's username/name based on their ID. Available to everyone."""
+    """Get a user's username/name based on their ID."""
     # no authentication needed, public info. A better app would only provide this info to people who have something in common with the user
     ## like they share a board. But for now, it's just public.
     error = 'None'
