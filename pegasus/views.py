@@ -173,7 +173,7 @@ def register_user():
             g.db.execute('insert into users (username, password, email, name) values (?, ?, ?, ?)', [un, pw, em, request.form['name']])
             g.db.commit()
             login_user(un)
-            flash('Successfully registered!')
+            flash('Enregistré avec succès!')
             return redirect(url_for('index'))
         except sqlite3.IntegrityError as e:
             if e.args[0][32:] == 'email':
