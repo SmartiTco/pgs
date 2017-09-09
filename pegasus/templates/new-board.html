@@ -1,15 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
-  <h2>New Board</h2>
+  <h2>Nouveau tableau</h2>
   {% if error %}
    <div class='alert alert-danger' role='alert'> {{ error }} </div>
   {% endif %}
    <form action="{{ url_for('create_board') }}" name='board-form' method='post'>
         <input name='_csrf_token' type='hidden' value="{{ csrf_token() }}">
         <div class='form-group'>
-         <label for='title-form'>Title</label>
-         <input type='text' class='form-control' id='title-form' name='title' placeholder='OPTIONAL'>
+         <label for='title-form'>Titre</label>
+         <input type='text' class='form-control' id='title-form' name='title' placeholder='OPTIONEL'>
         </div>
-         <button type='submit' class='global-btn full-btn'>Create</button>
+         <button type='submit' class='global-btn full-btn'>Créer</button>
     </form>
 {% endblock %}
