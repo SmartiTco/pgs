@@ -1,9 +1,6 @@
-.. Pegasus documentation master file, created by
-   sphinx-quickstart on Sat May  7 11:17:20 2016.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. Seiya documentation master file, created by
 
-Pegasus
+Seiya
 =======
 
 .. toctree::
@@ -11,33 +8,32 @@ Pegasus
 
 .. _intro:
 
-Introduction
 -------------
-About
+Description
 ~~~~~~
-Pegasus is a whiteboard collaboration app whose aim is to enable/facilitate realtime sharing of ideas in the form of components (for example: text, images, code, etc) that can be pieced together and edited by several people in a live session, and exported at any time.
+Seiya est une application de collaboration de tableau blanc dont l'objectif est de permettre / faciliter le partage en temps réel d'idées sous la forme de composants (par exemple: text, images, code, etc) qui peut être reconstitué et édité par plusieurs personnes lors d'une session en direct, et exporté à tout moment.
 
-At this point in time (*v0.1.0*), the only component available is text, along with the sidebar chat (which is available to everyone, edit privileges or not).
+En ce moment (*v0.1.0*), Le seul composant disponible est le texte, avec le chat de la barre latérale (qui est disponible pour tous, édite des privilèges ou non).
 
-The plan is to add components, and features (like exporting the board as text instead of image), gradually, until the project reaches its initial purpose (stated above).
+Le plan consiste à ajouter des composants et des fonctionnalités (comme exporter le tableau en tant que texte au lieu d'image), progressivement, jusqu'à ce que le projet atteigne son but initial(indiqué ci-dessus).
 
-This project was part of the second edition of `Learn IT, Girl`_, and would not have been possible without the continuous mentorship, support, and tolerance of 'newbie' questions courtesy of `@daniel-j-h`_. 
+Ce projet faisait partie de la deuxième édition de `Learn IT, Girl`_,et n'aurait pas été possible sans le mentorat continu, le soutien et la tolérance de 'newbie' questions avec gracieuseté de `@daniel-j-h`_. 
 
 Rules
 ~~~~~~
-- Signed up users can create a board, to which they can give any number of other users access.
-- Each board can have 3 types of users with access:
+- Les utilisateurs inscrits peuvent créer un tableau, auquel ils peuvent donner accès à un nombre quelconque d'autres utilisateurs.
+- Chaque conseil peut avoir accès à 3 types d'utilisateurs:
 	- **Owner**
-		Can do everything others can plus: edit board title, terminate board early, invite others and control their permissions, and delete the board.
+		Peut faire tout ce qui peut être plus: éditer le titre du forum, terminer le conseil tôt, inviter d'autres et contrôler leurs autorisations, et supprimer le tableau.
 	- **Editor**
-		Can do everything viewers can plus: edit the components of the board.
+		Peut faire tout ce que les téléspectateurs peuvent plus: éditer les composants de la carte.
 	- **Viewer**
-		Can only view the board, export its content at any time, and participate in the sidebar chat.
-- **Editors** and **Viewers** can access the board either by signing into the website using the email they were invited with or accessing it through their unique invite link.
-- Any signed in user with access to a certain board who is also not its **Owner** can remove themselves at any time.
-- To avoid editing conflict, only one person can edit the board at a time.
+		Peut afficher le tableau, exporter son contenu à tout moment et participer au chat de la barre latérale.
+- **Editors** et **Viewers** peut accéder au conseil soit en vous connectant au site Web en utilisant le courrier électronique auquel ils ont été invités ou en y accédant par le biais de leur lien d'invitation unique.
+- Tout utilisateur connecté a accès à un certain conseil qui n'est pas non plus **Owner** peuvent se retirer à tout moment.
+- Pour éviter l'édition de conflits, une seule personne peut modifier la carte à la fois.
 
-.. note:: In order to simplify interaction with the server, most of the "heavy lifting" is done client-side. The server simply records and supplies data about the board as needed, and the client pieces it together in the DOM. The client-side board logic can be found `on Github`_.
+.. note:: Afin de simplifier l'interaction avec le serveur, la plupart des "heavy lifting" est fait cote client. Le serveur enregistre et fournit simplement des données sur le tableau au besoin, et le client le regroupe dans le DOM. La logique du tableau côté client peut être trouvée `on Github`_.
 
 Installation
 ~~~~~~~~~~~~
@@ -62,13 +58,6 @@ Installation
 .. note:: Default IP:port is 127.0.0.1:5000. You can change that by specifying the port and/or IP like this:
 	``$ ./run_pegasus.py -ip IP_ADDRESS -port PORT_NUMBER``
 
-
-.. _Learn IT, Girl: http://learnitgirl.com
-.. _@daniel-j-h: https://github.com/daniel-j-h
-.. _virtualenv: https://pypi.python.org/pypi/virtualenv
-.. _on Github: https://github.com/blaringsilence/pegasus/blob/master/pegasus/templates/show-board.html
-
-.. _docs:
 
 Docs
 -----
