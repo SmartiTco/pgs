@@ -7,26 +7,26 @@
    <form action="{{ url_for('register_user') }}" name='register-form' method='post' onsubmit='return validateForm()'>
         <input name='_csrf_token' type='hidden' value="{{ csrf_token() }}">
         <div class='form-group'>
-         <label for='name-form'>Name</label>
-         <input type='text' class='form-control' id='name-form' name='name' placeholder='OPTIONAL'>
+         <label for='name-form'>Nom & Prénom</label>
+         <input type='text' class='form-control' id='name-form' name='name' placeholder='Optionnels'>
         </div>
         <div class='form-group'>
-         <label for='username-form' id='username-label'>Username</label>
-         <input type='text' class='form-control' id='username-form' name='username' pattern='^[a-zA-Z0-9_-]{3,16}$' title='Username must consist of letters, numbers, underscores, or hyphens only, and must be at least 3 characters long and at most 16' placeholder='3 TO 16 CHARACTERS LONG' required>
+         <label for='username-form' id='username-label'>Nom d'utilisateur</label>
+         <input type='text' class='form-control' id='username-form' name='username' pattern='^[a-zA-Z0-9_-]{3,16}$' title='Caractères autorisées: lettre, chiffre, underscore, hyphénation. Longueur minimum: 3 caractères, longueur maximum: 16 caractères.' placeholder='3 TO 16 CHARACTERS LONG' required>
         </div>
         <div class='form-group'>
-         <label for='email-form' id='email-label'>Email</label>
+         <label for='email-form' id='email-label'>Adresse e-mail</label>
          <input type='email' class='form-control' id='email-form' name='email' placeholder='ABC@XYZ.COM' required>
         </div>
         <div class='form-group'>
-         <label for='password-form'>Password</label>
-         <input type='password' class='form-control' id='password-form' name='password' placeholder='GOING ONCE..'  pattern=".{6,}" title='Password must be at least 6 characters long.' required>
+         <label for='password-form'>Mot de passe</label>
+         <input type='password' class='form-control' id='password-form' name='password' placeholder='Entrer une fois...'  pattern=".{6,}" title='Le mot de passe doit compter au moins 6 caractères.' required>
         </div>
         <div class='form-group'>
-         <label for='password-confirm-form' id='password-confirm-label'>Confirm password</label>
-         <input type='password' class='form-control' id='password-confirm-form' name='password-confirm' placeholder='GOING TWICE..' required>
+         <label for='password-confirm-form' id='password-confirm-label'>Confirmation mot de passe</label>
+         <input type='password' class='form-control' id='password-confirm-form' name='password-confirm' placeholder='Entrer une deuxième fois...' required>
         </div>
-         <button type='submit' class='global-btn full-btn'>Register</button>
+         <button type='submit' class='global-btn full-btn'>S'inscrire</button>
     </form>
 {% endblock %}
 

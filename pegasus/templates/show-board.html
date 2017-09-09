@@ -2,15 +2,15 @@
 {% block controllers %}
 	<input type="hidden" name="board-id-general" value="{{ boardID }}">
 {% if isOwner %}
-	<button class='global-btn register-btn delete-btn' title='Delete Board' data-toggle='modal' data-target='#deleteModal'><i class='fa fa-trash'></i></button>
+	<button class='global-btn register-btn delete-btn' title='Effacer tableau' data-toggle='modal' data-target='#deleteModal'><i class='fa fa-trash'></i></button>
 	{% if not isDone %}
-	<button class='global-btn register-btn board-btn' title='Mark As Done' data-toggle='modal' data-target='#markAsDoneModal'><i class='fa fa-check'></i></button>
+	<button class='global-btn register-btn board-btn' title='Marquer comme terminé' data-toggle='modal' data-target='#markAsDoneModal'><i class='fa fa-check'></i></button>
 	{% endif %}
-	<button class='global-btn register-btn board-btn' title='See Invited Users' data-toggle='modal' data-target='#invitedUsersModal'><i class='fa fa-users'></i></button>
-	<button class='global-btn register-btn board-btn' title='Edit Board' data-toggle='modal' data-target='#editModal'><i class='fa fa-pencil'></i></button>
-	<button class='global-btn register-btn board-btn' title='Invite Others' data-toggle='modal' data-target='#inviteModal'><i class='fa fa-envelope'></i></button>
+	<button class='global-btn register-btn board-btn' title='Voir les invités' data-toggle='modal' data-target='#invitedUsersModal'><i class='fa fa-users'></i></button>
+	<button class='global-btn register-btn board-btn' title='Modifier le tableau' data-toggle='modal' data-target='#editModal'><i class='fa fa-pencil'></i></button>
+	<button class='global-btn register-btn board-btn' title='Inviter des utilisateurs' data-toggle='modal' data-target='#inviteModal'><i class='fa fa-envelope'></i></button>
 {% else %}
-	<button class='global-btn register-btn delete-btn' title='Remove Yourself' data-toggle='modal' data-target='#removeSelfModal'><i class='fa fa-times'></i></button>
+	<button class='global-btn register-btn delete-btn' title='Quitter le groupe' data-toggle='modal' data-target='#removeSelfModal'><i class='fa fa-times'></i></button>
 {% endif %}
 {% endblock %}
 {% block content %}
@@ -19,14 +19,14 @@
 	{% if not session.logged_in %}
 		<div class="alert alert-success">
 		  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		  <strong>Welcome, {{email}}!</strong> You've been invited! Sign up/Login to continue with your username.
+		  <strong>Bienvenue, {{email}}!</strong> Vous avez été invité ! Inscrivez / Connectez vous pour continuer avec votre nom d'utilisateur. 
 		</div>
 	{% endif %}
 		<h2><span id='board-title'>{{title}}</span>
 			<small> 
 				<i id="time-until-done" {% if isDone %} class="fa fa-exclamation-circle" {% else %} class="fa fa-hourglass-half" {% endif %}></i> 
-				<i id="whoami-rank" {% if isOwner %} class="fa fa-check-circle" title="You're the owner" {% elif canEdit and not isOwner %} class="fa fa-pencil" title="You can edit" {% else %} class="fa fa-eye" title="You can only view" {% endif %}></i>
-				<button class='global-btn register-btn download-btn' title='Save As Image..' data-toggle='modal' data-target='#saveImageModal'><i class='fa fa-download'></i></button>
+				<i id="whoami-rank" {% if isOwner %} class="fa fa-check-circle" title="Vous êtes le créateur" {% elif canEdit and not isOwner %} class="fa fa-pencil" title="Vous pouvez modifier" {% else %} class="fa fa-eye" title="You can only view" {% endif %}></i>
+				<button class='global-btn register-btn download-btn' title='Enregistrer comme une image...' data-toggle='modal' data-target='#saveImageModal'><i class='fa fa-download'></i></button>
 			</small>
 		</h2>
 	</div>
@@ -57,7 +57,7 @@
 				<div class='form-group'>
 				<input type='hidden' name='_csrf_token' value='{{ csrf_token() }}'>
 					<hr>
-					<textarea class='form-control' name='message' id='chat-textarea' placeholder="SAY SOMETHING..."></textarea>
+					<textarea class='form-control' name='message' id='chat-textarea' placeholder="Dites quelque chose"></textarea>
 				</div>
 			</form>
 	{% endif %}
@@ -78,7 +78,7 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="invitedUsersLabel">Invited Users</h4>
+		        <h4 class="modal-title" id="invitedUsersLabel">Utilisateurs invités</h4>
 		      </div>
 		      <div class="modal-body" id="invited-users-modal-body">				 	
 		      	 <h4 class='text-center' id='invited-users-spinner'><i class="fa fa-spinner fa-pulse"></i></h4>
@@ -95,16 +95,16 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="deleteLabel">Delete Board</h4>
+		        <h4 class="modal-title" id="deleteLabel">Effacer le tableau</h4>
 		      </div>
 		      <div class="modal-body text-center">
-				  <h4>Are you sure you want to delete this board?</h4>
-				  <p>This cannot be undone. All data related to the board, including invites, etc, will not be available.</p>
+				  <h4>Voulez-vous effacer ce tableau ?</h4>
+				  <p>Cette action ne peut-être annulée. Toutes les données liées à ce tableau ainsi que l'interaction avec les autres utilisateurs seront détruites.</p>
 				  <form id='delete-form' method='post'>
 				  	<input type='hidden' name='_csrf_token' value='{{ csrf_token() }}'>
 				  </form>
-				  <button id='delete-this-board' class='global-btn half-btn delete-btn'>Yes</button>
-				  <button id='do-not-delete-this-board' class='global-btn half-btn neutral-btn'>No</button>
+				  <button id='delete-this-board' class='global-btn half-btn delete-btn'>Oui</button>
+				  <button id='do-not-delete-this-board' class='global-btn half-btn neutral-btn'>Non</button>
 		      </div>
 		    </div>
 		  </div>
@@ -117,17 +117,17 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="markAsDoneLabel">Mark As Done</h4>
+		        <h4 class="modal-title" id="markAsDoneLabel">Marquer comme terminer</h4>
 		      </div>
 		      <div class="modal-body text-center">
-				  <h4>Are you sure you want to mark this board as done?</h4>
-				  <p>This cannot be undone.</p>
+				  <h4>Voulez-vous marquer ce tableau commer terminé ?</h4>
+				  <p>Cette action ne peut-être annulée.</p>
 				  <form id='mark-as-done-form'>
 				  	<input type='hidden' name='_csrf_token' value='{{ csrf_token() }}'>
 				  	<input type='hidden' name='boardID' value='{{ boardID }}'>
 				  </form>
-				  <button id='mark-as-done' class='global-btn half-btn'>Yes</button>
-				  <button id='do-not-mark-as-done' class='global-btn half-btn'>No</button>
+				  <button id='mark-as-done' class='global-btn half-btn'>Oui</button>
+				  <button id='do-not-mark-as-done' class='global-btn half-btn'>Non</button>
 		      </div>
 		    </div>
 		  </div>
@@ -140,16 +140,16 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="editLabel">Edit Board</h4>
+		        <h4 class="modal-title" id="editLabel">Modifier le tableau</h4>
 		      </div>
 		      <div class="modal-body">
 				  <form id='edit-board-form'> <!--CHANGE-->
 				  	<input name='_csrf_token' type='hidden' value="{{ csrf_token() }}">
 				  	<div class='form-group'>
-				     <label for='title-modal'>Title</label>
+				     <label for='title-modal'>Titre</label>
 				     <input type='text' class='form-control' id='title-modal' name='title' value='{{ title }}' required>
 				    </div>
-				     <button type='submit' class='global-btn full-btn' id='edit-button'>Save</button>
+				     <button type='submit' class='global-btn full-btn' id='edit-button'>Sauvegarder</button>
 				  </form>
 		      </div>
 		    </div>
@@ -162,27 +162,27 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="inviteLabel">Invite By Email</h4>
+		        <h4 class="modal-title" id="inviteLabel">Inviter par e-mail</h4>
 		      </div>
 		      <div class="modal-body">
 				  <form id='invite-form'> <!--CHANGE-->
 				  	<input name='_csrf_token' type='hidden' value="{{ csrf_token() }}">
 				  	<div class='form-group'>
-				     <label for='email-modal'>Email</label>
-				     <input type='email' class='form-control' id='email-modal' name='email'  placeholder='ENTER THEIR EMAIL' required>
+				     <label for='email-modal'>Adresse e-mail</label>
+				     <input type='email' class='form-control' id='email-modal' name='email'  placeholder='Entrer votre adresse e-mail...' required>
 				    </div>
 				    <div class='form-group'>
 					     <label for='type-modal'>Permission</label>
 					     <div id='type-modal'>
 					     	<div class="radio-inline">
-							  <label><input type="radio" name="type" value='view' required>View only</label>
+							  <label><input type="radio" name="type" value='view' required>Consultation</label>
 							</div>
 							<div class="radio-inline">
-							  <label><input type="radio" name="type" value='edit' required>Edit</label>
+							  <label><input type="radio" name="type" value='edit' required>Modification</label>
 							</div>
 						</div>
 				    </div>
-				     <button type='submit' class='global-btn full-btn' id='invite-button'>Invite</button>
+				     <button type='submit' class='global-btn full-btn' id='invite-button'>Inviter</button>
 				  </form>
 		      </div>
 		    </div>
@@ -197,17 +197,17 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="removeSelfLabel">Remove Yourself</h4>
+		        <h4 class="modal-title" id="removeSelfLabel">Quitter le tableau</h4>
 		      </div>
 		      <div class="modal-body text-center">
-				  <h4>Are you sure you want to remove yourself from this board?</h4>
-				  <p>You will not be able to view or interact with the board unless the creator re-invites you.</p>
+				  <h4>Voulez-vous quitter le groupe ?</h4>
+				  <p>Vous ne pourrez plus voir ni interagir avec les autres utilisateurs, à moins que le créateur ne vous ré-invite.</p>
 				  <form id='remove-self-form' action="{{ url_for('remove_self') }}" method='post'>
 				  	<input type='hidden' name='_csrf_token' value='{{ csrf_token() }}'>
 				  	<input type='hidden' name='boardID' value='{{ boardID }}'>
 				  </form>
-				  <button id='remove-thyself' class='global-btn half-btn delete-btn'>Yes</button>
-				  <button id='do-not-remove-thyself' class='global-btn half-btn neutral-btn'>No</button>
+				  <button id='remove-thyself' class='global-btn half-btn delete-btn'>Oui</button>
+				  <button id='do-not-remove-thyself' class='global-btn half-btn neutral-btn'>Non</button>
 		      </div>
 		    </div>
 		  </div>
@@ -220,10 +220,10 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="saveImageLabel">Save Board As Image</h4>
+		        <h4 class="modal-title" id="saveImageLabel">Enregistrer le tableau</h4>
 		      </div>
 		      <div class="modal-body text-center" id="save-image-body">
-				  <h4 id="save-image-instructions">Right click the box below, then Save image as..</h4>
+				  <h4 id="save-image-instructions">Effectuer un clic droit sur ce champ, puis Enregistrer comme une image...</h4>
 				  <span id="save-image-spinner"><i class="fa fa-pulse fa-spinner"></i></span>
 		      </div>
 		    </div>
