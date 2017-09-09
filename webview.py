@@ -41,5 +41,5 @@ class Browser(QWebView):
 app = QApplication(sys.argv)
 view = Browser()
 view.showMaximized()
-view.load("http://192.168.1.115:5000")
+view.load("http://127.0.0.1:5000")
 app.exec_()
