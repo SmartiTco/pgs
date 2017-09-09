@@ -1,5 +1,5 @@
 """
-Views
+Vue
 ------
 Ce module contient toute la logique commerciale liée aux "vues" / URL de l'application et à la manière dont le serveur interagit
 avec la base de données.
