@@ -1,0 +1,350 @@
+/* SCROLLBAR */
+/* Turn on custom 8px wide scrollbar */
+::-webkit-scrollbar {
+  width: 10px; /* 1px wider than Lion. */
+  /* This is more usable for users trying to click it. */
+  background-color: rgba(0,0,0,0);
+  -webkit-border-radius: 100px;
+}
+/* hover effect for both scrollbar area, and scrollbar 'thumb' */
+::-webkit-scrollbar:hover {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+ 
+::-webkit-scrollbar-thumb:vertical {
+  
+  background: rgba(0,0,0,0.5);
+  -webkit-border-radius: 100px;
+  background-clip: padding-box;
+  border: 2px solid rgba(0, 0, 0, 0);
+  min-height: 10px; /*Prevent it from getting too small */
+}
+::-webkit-scrollbar-thumb:vertical:active {
+  background: rgba(0,0,0,0.61); /* Some darker color when you click it */
+  -webkit-border-radius: 100px;
+}
+/* END SCROLLBAR */
+.li        		{ margin: 0; padding: 0; }
+.li li, .li ol  { margin: 0.8em 1.2em; }
+
+*{
+	font-family: 'Titillium Web', sans-serif;
+}
+
+#logo-svg{
+	width:3em;
+	height:2em;
+	display:inline;
+	
+}
+.logo-polygon{
+	fill: #07C87F;
+}
+.modal-header, .header{
+	color: #f9fafa; /* GLOBAL WHITE */
+	text-transform: uppercase;
+	background: #1A1A1A; /* fallback for old browsers */ /* GLOBAL DARK */
+	background: -webkit-linear-gradient(to right, #1A1A1A , #414345); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #1A1A1A , #414345); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.delete-form{
+	font-size:0.7em;
+}
+.download-btn{
+	background-color:#2980b9 !important; /* GLOBAL BLUE */
+	font-size:0.8em !important;
+	padding-right:0.3em !important;
+	padding-left:0.3em !important;
+}
+
+.download-btn:hover{
+	color: #2980b9 !important;
+	background-color: white !important;
+}
+#saveImageModal canvas{
+	width:60%;
+	padding:0.5em;
+	border:0.2em dashed rgb(98,77,130);
+}
+#saveImageModal canvas:hover{
+	cursor: copy;
+}
+#save-image-instructions{
+	color: rgb(98,77,130);
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.global-btn{
+	border-radius:1em;
+	padding-right:1em;
+	padding-left:1em;
+	padding-top:0.2em;
+	padding-bottom:0.2em;
+	border-width:0;
+	font-size:1em;
+	text-transform: uppercase;
+	background-color: #07C87F; /* GLOBAL GREEN */
+	color:#f9fafa;
+	transition: background-color 0.5s;
+	-webkit-transition: background-color 0.5s;
+}
+.alert{
+	border-radius:0 !important;
+}
+
+.login-nav{
+	margin-top:0.4em;
+}
+
+.edit-checkbox{
+	margin-left:0.2em !important;
+}
+label{
+	font-size:1.2em;
+}
+
+.checkbox-inline{
+	font-size: 1em;
+}
+.full-btn{
+	width:100%;
+}
+.half-btn{
+	width:30%;
+}
+
+
+.form-control{
+	border-width: 0.2em;
+	border-radius:0px;
+	border-top:0px;
+	border-right:0px;
+	border-left:0px;
+	box-shadow: 0 0 0;
+	transition: background-color 0.5s, border-color 0.5s;
+	-webkit-transition:background-color 0.5s, border-color 0.5s;
+}
+
+#chat-form{
+	width:100%;
+}
+#chat-form hr{
+	border-width:0.8em;
+	margin-bottom:0;
+	border-color:#07C87F;
+}
+
+
+#chat-textarea{
+	padding-top:1em;
+	height:7em;
+	width: 100%;
+	resize: none;
+}
+
+.form-control:hover{
+	background-color:#eee;
+	border-color: rgba(7, 200, 127, 1);
+}
+.form-control:focus{
+	border-color: rgba(7, 200, 127, 1);
+  	box-shadow: 0 0 0 rgba(7, 200, 127, 0.3);
+}
+.global-btn:hover{
+	background-color: #f9fafa;
+	color:#07C87F;
+}
+
+.board-btn{
+	background-color: #f39c12; /* GLOBAL ORANGE */
+}
+
+.board-btn:hover{
+	color:#f39c12;
+}
+
+.delete-btn{
+	background-color: #e74c3c; /* GLOBAL RED*/
+}
+.delete-btn:hover{
+	color: #e74c3c; /* GLOBAL RED*/
+}
+.neutral-btn{
+	background-color: #7f8c8d;
+}
+
+.neutral-btn:hover{
+	color: #7f8c8d;
+}
+.register-btn{
+	margin-right: 1em;
+}
+
+#chat-board{
+	height: 58vh;
+	overflow: scroll;
+}
+
+.header{
+	position: relative;
+	padding:1em;      
+	min-height: 8vh;
+}
+
+.header a, .all a{
+	color:#07C87F;
+	transition: color 0.5s;
+	-webkit-transition: color 0.5s;
+}
+
+.header a:hover, .header a:focus, .all a:hover, .all a:focus{
+	text-decoration: none;
+}
+
+.header a:hover{
+	color:#f9fafa;
+}
+
+.all{
+	margin-top: 1em;
+}
+
+.all a:hover{
+	color:#087A4F;
+}
+
+
+.title{
+	font-size:1.5em;
+}
+
+.chat-username{
+	text-transform: uppercase;
+}
+.chat-message-date{
+	margin-right:0.5em;
+	margin-left: 0.2em;
+}
+
+.chat-message-details{
+	margin-left: 1.5em;
+	margin-right:1.5em;
+	padding:0.5em;
+	background-color: #f39c12;
+	border-radius:0.5em;
+	display: block;
+}
+
+
+.chat-message-top{
+	margin-bottom:0.5em;
+	display: block;
+}
+
+.chat-message{
+	font-weight: bold;
+	margin-bottom:2em;
+	margin-top: 2em;
+}
+
+.followup-message{
+	margin-top:-1.8em !important;
+}
+
+.top-date{
+	text-transform: uppercase;
+	font-size:0.8em;
+	font-weight: bold;
+}
+
+#invited-users-list{
+	font-size: 1.1em;
+}
+
+#invited-users-list form{
+	margin-bottom: 1.5em;
+	border-bottom:2px solid #eee;
+}
+#invited-users-list input[type="checkbox"]{
+	/* All browsers except webkit*/
+  transform: scale(1.1);
+
+  /* Webkit browsers*/
+  -webkit-transform: scale(1.1);
+}
+#invited-users-list .edit-checkbox, #invited-users-list .edit-checkbox-title{
+	float:right;
+}
+#invited-users-list .invited-users-title{
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 1em;
+}
+
+.section-identifier{
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: rgb(98,77,130); /* GLOBAL PURPLE */
+}
+
+.section-identifier:hover{
+	background-color: white;
+	color: rgb(98,77,130);
+}
+
+#time-until-done{
+	font-size: 0.9em;
+}
+.disable{
+	pointer-events: none;
+}
+#board-grid{
+	min-height: 77vh;
+}
+
+#board-notice{
+	min-height: 1em;
+}
+
+#board-notice p{
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #f39c12;
+	border-bottom:1px dashed #f39c12;
+	padding-bottom:0.5em;
+}
+
+#whos-editing .whos-editing-name{
+	font-size: 1.1em;
+}
+.draggable-text{
+	font-size:1.3em;
+	padding:0.1em;
+	text-align:left;
+	left:0;
+	top:0;
+	display: inline-block;
+	position:relative;
+}
+.draggable-text:hover, .draggable-text:focus{
+	cursor: move;
+	border:1px dashed rgb(98,77,130);
+}
+
+#board-tools{
+	border-bottom:2px solid rgb(98,77,130);
+	padding-bottom:0.5em;
+	margin-bottom:0.5em;
+}
+
+.tool-btn{
+	font-size:0.9em;
+}
+
+.tool-btn:hover{
+	cursor: pointer;
+}
+
+
+
+

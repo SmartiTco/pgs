@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h2>Login</h2>
+  {% if error %}
+  <div class='alert alert-danger' role='alert'> {{ error }} </div>
+  {% endif %}
+   <form action="{{ url_for('login') }}" method='post'>
+        <input name='_csrf_token' type='hidden' value="{{ csrf_token() }}">
+        <div class='form-group'>
+         <label for='username-form'>Username</label>
+         <input type='text' class='form-control' id='username-form' name='username' required>
+        </div>
+        <div class='form-group'>
+         <label for='password-form'>Password</label>
+         <input type='password' class='form-control' id='password-form' name='password' required>
+        </div>
+         <button type='submit' class='global-btn full-btn'>Login</button>
+      </form>
+{% endblock %}
